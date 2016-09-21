@@ -92,79 +92,78 @@ type instructionT struct {
 func (ins *instructionT) variantsFilled() int {
 	n := 0
 	if ins.AssertRegexMatch != nil {
-		n += 1
+		n++
 	}
 	if ins.AssertFindBase64 != nil {
-		n += 1
+		n++
 	}
 	if ins.WhitespaceNormalize != nil {
-		n += 1
+		n++
 	}
 	if ins.RegexCapture != nil {
-		n += 1
+		n++
 	}
 	if ins.Fetch != nil {
-		n += 1
+		n++
 	}
 	if ins.SelectorJSON != nil {
-		n += 1
+		n++
 	}
 	if ins.SelectorCSS != nil {
-		n += 1
+		n++
 	}
 	if ins.TransformURL != nil {
-		n += 1
+		n++
 	}
 	return n
 }
 
-func (x instructionT) Name() string {
+func (ins instructionT) Name() string {
 	switch {
-	case x.AssertRegexMatch != nil:
+	case ins.AssertRegexMatch != nil:
 		return string(cmdAssertRegexMatch)
-	case x.AssertFindBase64 != nil:
+	case ins.AssertFindBase64 != nil:
 		return string(cmdAssertFindBase64)
-	case x.WhitespaceNormalize != nil:
+	case ins.WhitespaceNormalize != nil:
 		return string(cmdWhitespaceNormalize)
-	case x.RegexCapture != nil:
+	case ins.RegexCapture != nil:
 		return string(cmdRegexCapture)
-	case x.Fetch != nil:
+	case ins.Fetch != nil:
 		return string(cmdFetch)
-	case x.SelectorJSON != nil:
+	case ins.SelectorJSON != nil:
 		return string(cmdSelectorJSON)
-	case x.SelectorCSS != nil:
+	case ins.SelectorCSS != nil:
 		return string(cmdSelectorCSS)
-	case x.TransformURL != nil:
+	case ins.TransformURL != nil:
 		return string(cmdTransformURL)
 	}
 	return "<invalid instruction>"
 }
 
-func (x instructionT) String() string {
+func (ins instructionT) String() string {
 	var s = ""
 	switch {
-	case x.AssertRegexMatch != nil:
-		s = fmt.Sprintf("%v", x.AssertRegexMatch)
-	case x.AssertFindBase64 != nil:
-		s = fmt.Sprintf("%v", x.AssertFindBase64)
-	case x.WhitespaceNormalize != nil:
-		s = fmt.Sprintf("%v", x.WhitespaceNormalize)
-	case x.RegexCapture != nil:
-		s = fmt.Sprintf("%v", x.RegexCapture)
-	case x.Fetch != nil:
-		s = fmt.Sprintf("%v", x.Fetch)
-	case x.SelectorJSON != nil:
-		s = fmt.Sprintf("%v", x.SelectorJSON)
-	case x.SelectorCSS != nil:
-		s = fmt.Sprintf("%v", x.SelectorCSS)
-	case x.TransformURL != nil:
-		s = fmt.Sprintf("%v", x.TransformURL)
+	case ins.AssertRegexMatch != nil:
+		s = fmt.Sprintf("%v", ins.AssertRegexMatch)
+	case ins.AssertFindBase64 != nil:
+		s = fmt.Sprintf("%v", ins.AssertFindBase64)
+	case ins.WhitespaceNormalize != nil:
+		s = fmt.Sprintf("%v", ins.WhitespaceNormalize)
+	case ins.RegexCapture != nil:
+		s = fmt.Sprintf("%v", ins.RegexCapture)
+	case ins.Fetch != nil:
+		s = fmt.Sprintf("%v", ins.Fetch)
+	case ins.SelectorJSON != nil:
+		s = fmt.Sprintf("%v", ins.SelectorJSON)
+	case ins.SelectorCSS != nil:
+		s = fmt.Sprintf("%v", ins.SelectorCSS)
+	case ins.TransformURL != nil:
+		s = fmt.Sprintf("%v", ins.TransformURL)
 	}
 	if s != "" {
 		return fmt.Sprintf("[ins %v]", s)
-	} else {
-		return "[nil instruction]"
 	}
+	return "[nil instruction]"
 }
 
 type assertRegexMatchT struct {
@@ -234,7 +233,7 @@ func (x *errorT) UnmarshalJSON(b []byte) error {
 	if !ok {
 		return fmt.Errorf("unrecognized proof status '%v'", ss[0])
 	}
-	x.Status = keybase1.ProofStatus(status)
+	x.Status = status
 	x.Description = ss[1]
 	return nil
 }
